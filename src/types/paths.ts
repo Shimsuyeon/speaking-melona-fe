@@ -1,5 +1,6 @@
 enum Paths {
-  main = "/",
+  Landing = "/",
+  Scan = "/scan",
 }
 
 export default Paths;
