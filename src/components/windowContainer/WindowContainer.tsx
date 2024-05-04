@@ -64,10 +64,10 @@ const XIcon = () => (
 
 const WindowContainer = ({ children, style }: WindowContainerProps) => {
   return (
-    <div className={"border-2 border-[#3a3a3a]"} style={style}>
+    <div className={"border-2 border-border"} style={style}>
       <div
         className={
-          "p-[3px] flex justify-end items-center w-full border-b-2 border-[#3a3a3a] bg-[#e7e7e7]"
+          "p-[3px] flex justify-end items-center w-full border-b-2 border-border bg-[#e7e7e7]"
         }
       >
         <OIcon />

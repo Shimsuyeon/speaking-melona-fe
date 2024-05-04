@@ -17,3 +17,7 @@
   font-display: swap;
   src: url("assets/fonts/PretendardVariable.woff2") format("woff2-variations");
 }
+
+.button {
+  @apply border-2 border-black font-hanna rounded-2xl flex justify-center items-center min-h-[50px];
+}
