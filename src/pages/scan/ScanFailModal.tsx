@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Button, { ButtonVariant } from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Text from "src/atoms/text/Text";
 import Modal from "src/components/modal/Modal";
@@ -32,6 +33,9 @@ const ScanFailModal = ({ onClose }: FailureModalProps) => {
         <Text font={Font.SemiBold} size={"2rem"} textAlign={"center"}>
           Scan Failed
         </Text>
+        <Button onClick={onClose} variant={ButtonVariant.outlined}>
+          Close
+        </Button>
       </Flex>
     </Modal>
   );
