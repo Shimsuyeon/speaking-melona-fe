@@ -55,6 +55,7 @@ const ScanPage = () => {
         </div>
       </div>
       {checkModalOpen && (
+        //@ts-ignore
         <ModalPortal>
           <ScanFailModal onClose={() => setCheckModalOpen(false)} />
         </ModalPortal>
