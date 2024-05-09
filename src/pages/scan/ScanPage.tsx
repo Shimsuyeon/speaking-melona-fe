@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import WindowContainer from "src/components/windowContainer/WindowContainer";
+import ModalPortal from "src/template/modalPortal/MordalPortal";
 import Paths from "src/types/paths";
+import ScanFailModal from "./ScanFailModal";
 
 const ScanPage = () => {
+  const [checkModalOpen, setCheckModalOpen] = useState(false);
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-col px-4 h-screen justify-center max-w-96">
@@ -38,7 +42,10 @@ const ScanPage = () => {
         <div className={"h-[3%]"} />
 
         <div className={"flex flex-col items-center gap-4"}>
-          <button className={"button w-[240px] bg-secondary"}>
+          <button
+            className={"button w-[240px] bg-secondary"}
+            onClick={() => setCheckModalOpen(true)}
+          >
             <p className={"text-[25px]"}>추가 스캔</p>
           </button>
 
@@ -47,6 +54,11 @@ const ScanPage = () => {
           </Link>
         </div>
       </div>
+      {checkModalOpen && (
+        <ModalPortal>
+          <ScanFailModal onClose={() => setCheckModalOpen(false)} />
+        </ModalPortal>
+      )}
     </div>
   );
 };

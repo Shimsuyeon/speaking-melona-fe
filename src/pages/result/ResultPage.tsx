@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import BananaMilk from "src/assets/bananaMilk.webp";
 import CreamBread from "src/assets/creamBread.webp";
@@ -18,6 +19,20 @@ const ResultPage = () => {
       text: "안녕! 나는 바나나우유야! 나는 크림빵이랑 제일 친해! 이렇게 만나게 되어 기쁘당 ㅎㅎ 너랑 친하게 지냈으면 좋겠어! 혹시 나한테 다른 친구도 소개 시켜줄 수 있을까?",
     },
   ];
+  function shareContent() {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: `얘랑쟤랑? 대화궁합!`,
+          text: ``,
+          url: ``,
+        })
+        .then(() => toast.success("공유 로딩 성공"))
+        .catch(() => toast.error("공유 로딩 실패"));
+    } else {
+      console.log("Navigator.share를 지원하지 않음");
+    }
+  }
 
   return (
     <div className="flex flex-col items-center">
@@ -86,7 +101,10 @@ const ResultPage = () => {
         <div className={"h-[4%]"} />
 
         <div className={"flex flex-col items-center gap-4"}>
-          <button className={"button w-[240px] bg-secondary"}>
+          <button
+            className={"button w-[240px] bg-secondary"}
+            onClick={shareContent}
+          >
             <p className={"text-[25px]"}>결과 공유</p>
           </button>
 
