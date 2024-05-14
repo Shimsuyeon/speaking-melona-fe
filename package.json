@@ -10,14 +10,19 @@
     "lint": "eslint src/"
   },
   "dependencies": {
+    "@ericblade/quagga2": "^1.8.4",
     "autoprefixer": "^10.4.19",
     "i18next": "^23.7.16",
     "i18next-browser-languagedetector": "^7.2.0",
     "prettier": "^3.2.4",
     "react": "^18.2.0",
+    "react-barcode-reader": "^0.0.2",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
     "react-i18next": "^14.0.0",
     "react-router-dom": "^6.23.0",
+    "react-vision-camera": "^1.0.1",
+    "recoil": "^0.7.7",
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
