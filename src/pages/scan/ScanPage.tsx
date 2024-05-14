@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import WindowContainer from "src/components/windowContainer/WindowContainer";
 import Paths from "src/types/paths";
+import ScanCard from "./ScarCard";
 
 const ScanPage = () => {
   return (
@@ -32,6 +33,7 @@ const ScanPage = () => {
                 </svg>
               </button>
             ))}
+            <ScanCard />
           </div>
         </WindowContainer>
 
