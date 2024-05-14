@@ -33,7 +33,6 @@ const ScanPage = () => {
                 </svg>
               </button>
             ))}
-            <ScanCard />
           </div>
         </WindowContainer>
 
