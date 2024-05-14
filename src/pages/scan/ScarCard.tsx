@@ -16,7 +16,7 @@ const ScanCard = () => {
           className="min-w-full min-h-full object-cover object-center"
         />
       </div>
-      <p className="text-center text-sm font-medium">바나나우유</p>
+      <p className="text-center text-xs font-medium font-hanna">바나나우유</p>
     </button>
   );
 };
