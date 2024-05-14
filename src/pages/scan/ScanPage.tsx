@@ -4,6 +4,7 @@ import { useRecoilState } from "recoil";
 import WindowContainer from "src/components/windowContainer/WindowContainer";
 import { charactersState } from "src/store";
 import Paths from "src/types/paths";
+import ScanCard from "./ScarCard";
 
 import ScanningModal from "./ScanningModal";
 
