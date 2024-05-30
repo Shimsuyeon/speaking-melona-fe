@@ -1,17 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import { getCharacter } from "src/apis/speak-api";
 import WindowContainer from "src/components/windowContainer/WindowContainer";
 import { charactersState } from "src/store";
 import Paths from "src/types/paths";
-import ScanCard from "./ScarCard";
+import QueryKeys from "src/types/query-keys";
 
 import ScanningModal from "./ScanningModal";
+import ScanCard from "./ScarCard";
 
 const ScanPage = () => {
   const [openScanningModal, setOpenScanningModal] = useState(false);
   const [characters, setCharacters] = useRecoilState(charactersState);
 
+  // const barcode = 123;
+  // const { data } = useQuery({
+  //   queryKey: [QueryKeys.character, { barcode: barcode }],
+  //   queryFn: getCharacter,
+  // });
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-col px-4 h-screen justify-center max-w-96">

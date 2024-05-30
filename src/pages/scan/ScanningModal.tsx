@@ -1,8 +1,11 @@
 import Quagga from "@ericblade/quagga2";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useRecoilState } from "recoil";
+import { getCharacter } from "src/apis/speak-api";
 import { charactersState } from "src/store";
+import QueryKeys from "src/types/query-keys";
 
 import Scanner from "./Scanner";
 
@@ -17,7 +20,10 @@ const ScanningModal = ({ onClose }: ScanningModalProps) => {
   const scannerRef = useRef(null); // reference to the scanner element in the DOM
 
   const [characters, setCharacters] = useRecoilState(charactersState);
-
+  // const { data } = useQuery({
+  //   queryKey: [QueryKeys.character, { barcode:  }],
+  //   queryFn: getCharacter,
+  // });
   useEffect(() => {
     const init = async () => {
       const enableCamera = async () => {
