@@ -15,5 +15,5 @@ export const getCharacter = async ({
   );
   const image = URL.createObjectURL(base64toBlob(data.image));
 
-  return image;
+  return data;
 };

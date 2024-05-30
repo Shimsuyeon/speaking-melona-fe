@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { getCharacter } from "src/apis/speak-api";
@@ -14,12 +14,22 @@ import ScanCard from "./ScarCard";
 const ScanPage = () => {
   const [openScanningModal, setOpenScanningModal] = useState(false);
   const [characters, setCharacters] = useRecoilState(charactersState);
-
+  const barcode = "";
   // const barcode = 123;
-  // const { data } = useQuery({
-  //   queryKey: [QueryKeys.character, { barcode: barcode }],
-  //   queryFn: getCharacter,
-  // });
+  const { data, isError } = useQuery({
+    queryKey: [QueryKeys.character, { barcode: characters[0] }],
+    queryFn: getCharacter,
+  });
+  console.log(data);
+  // useEffect(() => {
+  //   const handleCharacterUpdate = () => {
+  //     if (data && !isError) {
+  //       setCharacters((prev) => [...prev, data.name]);
+  //     }
+  //   };
+  //   handleCharacterUpdate();
+  // }),
+  //   [characters];
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-col px-4 h-screen justify-center max-w-96">
@@ -40,7 +50,14 @@ const ScanPage = () => {
                 onClick={() => setOpenScanningModal(true)}
               >
                 {characters[index] ? (
-                  <p>{characters[index]}</p>
+                  <p>
+                    {characters[index]}
+                    {data && !isError ? data.name : ""}
+                    {data && !isError ? data.prompt : ""}
+                    {data && !isError ? data.image : ""}
+                    {data && !isError ? data.id : ""}
+                    {data && !isError ? data.barcode : ""}
+                  </p>
                 ) : (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
