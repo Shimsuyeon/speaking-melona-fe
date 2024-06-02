@@ -35,7 +35,7 @@ const LandingPage = () => {
         <div className={"h-[7%]"} />
 
         <div className={"flex justify-center"}>
-          <Link to={Paths.Scan} className={"button w-[170px]"}>
+          <Link to={Paths.Scan} className={"button w-[170px] bg-primary"}>
             <p className={"text-[25px]"}>시작하기</p>
           </Link>
         </div>

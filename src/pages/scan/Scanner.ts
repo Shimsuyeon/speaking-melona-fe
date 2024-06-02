@@ -29,7 +29,7 @@ const defaultLocatorSettings = {
   willReadFrequently: true,
 };
 
-const defaultDecoders = ["ean_reader"];
+const defaultDecoders = ["ean_reader", "ean_8_reader"];
 
 interface ScannerProps {
   onDetected: (result: any) => void;

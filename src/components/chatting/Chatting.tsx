@@ -1,3 +1,6 @@
+import DefaultImage from "src/assets/default.svg";
+import { colorSet } from "src/constants";
+
 interface ChattingProps {
   profileImage: string;
   text: string;
@@ -9,7 +12,7 @@ const Chatting = ({
   profileImage,
   text,
   direction,
-  pointColor = "#F4A06B",
+  pointColor = colorSet.secondary,
 }: ChattingProps) => {
   return (
     <div
@@ -20,10 +23,15 @@ const Chatting = ({
     >
       <div
         className={
-          "min-w-[56px] rounded-full border border-black overflow-hidden"
+          "min-w-[56px] rounded-full border border-gray-200 overflow-hidden"
         }
       >
-        <img src={profileImage} alt="profile" width={54} height={54} />
+        <img
+          src={profileImage || DefaultImage}
+          alt="profile"
+          width={54}
+          height={54}
+        />
       </div>
 
       <div

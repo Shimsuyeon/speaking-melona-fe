@@ -1,9 +1,9 @@
 import Quagga from "@ericblade/quagga2";
+import { useOverlay } from "@toss/use-overlay";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { useRecoilState } from "recoil";
-import { charactersState } from "src/store";
 
+import ScanCheckModal from "./ScanCheckModal";
 import Scanner from "./Scanner";
 
 interface ScanningModalProps {
@@ -12,11 +12,20 @@ interface ScanningModalProps {
 
 const ScanningModal = ({ onClose }: ScanningModalProps) => {
   const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]); // array of available cameras, as returned by Quagga.CameraAccess.enumerateVideoDevices()
-  const [cameraId, setCameraId] = useState<string | null>(null); // id of the active camera device
-  const [results, setResults] = useState<any[]>([]); // list of scanned results
   const scannerRef = useRef(null); // reference to the scanner element in the DOM
+  const isActiveRef = useRef(true);
 
-  const [characters, setCharacters] = useRecoilState(charactersState);
+  useEffect(() => {
+    const handleMobileBackEvent = () => {
+      onClose();
+    };
+
+    window.addEventListener("popstate", handleMobileBackEvent);
+
+    return () => {
+      window.removeEventListener("popstate", handleMobileBackEvent);
+    };
+  }, []);
 
   useEffect(() => {
     const init = async () => {
@@ -44,14 +53,32 @@ const ScanningModal = ({ onClose }: ScanningModalProps) => {
     init();
   }, []);
 
-  const handleBarcodeDetected = (result: string) => {
-    setCharacters((prev) => [...prev, result]);
+  const overlay = useOverlay();
+
+  const handleBarcodeDetected = async (result: string) => {
+    if (!isActiveRef.current) return;
+
+    isActiveRef.current = false;
+
+    await new Promise((resolve) => {
+      overlay.open(({ exit }) => (
+        <ScanCheckModal
+          barcode={result}
+          onClose={() => {
+            exit();
+            resolve(true);
+          }}
+        />
+      ));
+    });
+
+    isActiveRef.current = true;
 
     onClose();
   };
 
   return (
-    <div className={"absolute top-0 left-0 w-full"}>
+    <div className={"absolute top-0 left-0 w-full h-full"} onClick={onClose}>
       <div ref={scannerRef} style={{ position: "relative" }}>
         {/* <video style={{ width: window.innerWidth, height: 480, border: '3px solid orange' }}/> */}
         <canvas // 왠지 모르겠지만 없으면 Quagga가 캔버스를 만드는 듯
