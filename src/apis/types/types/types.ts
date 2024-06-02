@@ -37,3 +37,7 @@ export interface CharacterSuccessOutput {
 export interface CharacterErrorOutput {
   detail: [{ loc: [string, 0]; msg: string; type: string }];
 }
+
+export interface StorySuccessOutput {
+  story: string;
+}

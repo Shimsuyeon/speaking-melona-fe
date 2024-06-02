@@ -1,11 +1,8 @@
 import Quagga from "@ericblade/quagga2";
-import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useRecoilState } from "recoil";
-import { getCharacter } from "src/apis/speak-api";
 import { charactersState } from "src/store";
-import QueryKeys from "src/types/query-keys";
 
 import Scanner from "./Scanner";
 
@@ -15,15 +12,22 @@ interface ScanningModalProps {
 
 const ScanningModal = ({ onClose }: ScanningModalProps) => {
   const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]); // array of available cameras, as returned by Quagga.CameraAccess.enumerateVideoDevices()
-  const [cameraId, setCameraId] = useState<string | null>(null); // id of the active camera device
-  const [results, setResults] = useState<any[]>([]); // list of scanned results
   const scannerRef = useRef(null); // reference to the scanner element in the DOM
 
-  const [characters, setCharacters] = useRecoilState(charactersState);
-  // const { data } = useQuery({
-  //   queryKey: [QueryKeys.character, { barcode:  }],
-  //   queryFn: getCharacter,
-  // });
+  const [, setCharacters] = useRecoilState(charactersState);
+
+  useEffect(() => {
+    const handleMobileBackEvent = () => {
+      onClose();
+    };
+
+    window.addEventListener("popstate", handleMobileBackEvent);
+
+    return () => {
+      window.removeEventListener("popstate", handleMobileBackEvent);
+    };
+  }, []);
+
   useEffect(() => {
     const init = async () => {
       const enableCamera = async () => {
@@ -50,7 +54,7 @@ const ScanningModal = ({ onClose }: ScanningModalProps) => {
     init();
   }, []);
 
-  const handleBarcodeDetected = (result: string) => {
+  const handleBarcodeDetected = async (result: string) => {
     setCharacters((prev) => [...prev, result]);
 
     onClose();

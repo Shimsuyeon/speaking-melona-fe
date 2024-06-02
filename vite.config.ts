@@ -1,6 +1,5 @@
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import checker from "vite-plugin-checker";
 import svgr from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
 
@@ -15,25 +14,11 @@ export default defineConfig({
     proxy: {
       //CORS 방지를 위한 프록시 설정입니다.
       "/local": {
-        target: "https://your.api.domain.here", //실제 api 도메인을 넣어줍니다.
+        target: "https://api.baemin.delivery", //실제 api 도메인을 넣어줍니다.
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/local/, ""), //target url을 교체합니다.
       },
     },
   },
-  plugins: [
-    react(),
-    tsconfigPaths(),
-    checker({
-      typescript: true,
-      eslint: {
-        lintCommand: "eslint src/",
-        dev: {
-          logLevel: ["warning"],
-        },
-      },
-      enableBuild: false,
-    }),
-    svgr(),
-  ],
+  plugins: [react(), tsconfigPaths(), svgr()],
 });

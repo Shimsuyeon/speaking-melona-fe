@@ -1,4 +1,7 @@
+import { useMutation } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { generateStory } from "src/apis/speak-api";
 import BananaMilk from "src/assets/bananaMilk.webp";
 import CreamBread from "src/assets/creamBread.webp";
 import Chatting from "src/components/chatting/Chatting";
@@ -18,6 +21,14 @@ const ResultPage = () => {
       text: "안녕! 나는 바나나우유야! 나는 크림빵이랑 제일 친해! 이렇게 만나게 되어 기쁘당 ㅎㅎ 너랑 친하게 지냈으면 좋겠어! 혹시 나한테 다른 친구도 소개 시켜줄 수 있을까?",
     },
   ];
+
+  const generate = useMutation({
+    mutationFn: generateStory,
+  });
+
+  useEffect(() => {
+    generate.mutate({ barcodes: ["1234", "5678"] });
+  }, []);
 
   return (
     <div className="flex flex-col items-center">
