@@ -61,7 +61,7 @@ const ScanningModal = ({ onClose }: ScanningModalProps) => {
   };
 
   return (
-    <div className={"absolute top-0 left-0 w-full"}>
+    <div className={"absolute top-0 left-0 w-full h-full"} onClick={onClose}>
       <div ref={scannerRef} style={{ position: "relative" }}>
         {/* <video style={{ width: window.innerWidth, height: 480, border: '3px solid orange' }}/> */}
         <canvas // 왠지 모르겠지만 없으면 Quagga가 캔버스를 만드는 듯

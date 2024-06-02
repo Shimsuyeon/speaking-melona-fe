@@ -29,3 +29,17 @@ export const generateStory = async ({ barcodes }: { barcodes: string[] }) => {
 
   return data;
 };
+
+export const requestProduct = async ({
+  content,
+  barcode,
+}: {
+  content: string;
+  barcode: string;
+}) => {
+  const { data } = await apiPoster(
+    `/request?content=${content}&barcode=${barcode}`,
+  );
+
+  return data;
+};
