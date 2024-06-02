@@ -1,7 +1,7 @@
 export interface CharacterBarcodeSuccess {
   //read character success
   name: string;
-  barcode: string;
+  barcodes: string[];
   prompt: string;
   image: string;
   id: number;
@@ -21,14 +21,14 @@ export interface CharacterBarcodeError {
 export interface CharacterInput {
   //create character input
   name: string;
-  barcode: string;
+  barcodes: string[];
   prompt: string;
   image: string;
 }
 
 export interface CharacterSuccessOutput {
   name: string;
-  barcode: string;
+  barcodes: string[];
   prompt: string;
   image: string;
   id: number;

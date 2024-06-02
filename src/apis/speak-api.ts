@@ -6,6 +6,14 @@ import {
   StorySuccessOutput,
 } from "./types/types/types";
 
+export const getCharacters = async ({ queryKey }: { queryKey: [string] }) => {
+  const [,] = queryKey;
+
+  const { data } = await apiGetter<CharacterBarcodeSuccess[]>("/characters");
+
+  return data;
+};
+
 export const getCharacter = async ({
   queryKey,
 }: {
