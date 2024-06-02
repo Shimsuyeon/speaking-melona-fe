@@ -1,3 +1,4 @@
+import { useOverlay } from "@toss/use-overlay";
 import { Link } from "react-router-dom";
 import BananaMilk from "src/assets/bananaMilk.webp";
 import CreamBread from "src/assets/creamBread.webp";
@@ -6,7 +7,24 @@ import WindowContainer from "src/components/windowContainer/WindowContainer";
 import { colorSet } from "src/constants";
 import Paths from "src/types/paths";
 
+import ProductListModal from "./ProductListModal";
+
 const LandingPage = () => {
+  const overlay = useOverlay();
+
+  const openProductListModal = () => {
+    return new Promise((resolve) => {
+      overlay.open(({ exit }) => (
+        <ProductListModal
+          onClose={() => {
+            exit();
+            resolve(true);
+          }}
+        />
+      ));
+    });
+  };
+
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-col px-4 h-screen justify-center max-w-96">
@@ -34,10 +52,16 @@ const LandingPage = () => {
 
         <div className={"h-[7%]"} />
 
-        <div className={"flex justify-center"}>
-          <Link to={Paths.Scan} className={"button w-[170px] bg-primary"}>
+        <div className={"flex flex-col justify-center items-center gap-4"}>
+          <Link to={Paths.Scan} className={"button w-[240px] bg-primary"}>
             <p className={"text-[25px]"}>시작하기</p>
           </Link>
+          <button
+            className={"button w-[240px] bg-secondary"}
+            onClick={openProductListModal}
+          >
+            <p className={"text-[25px]"}>지원되는 상품 목록</p>
+          </button>
         </div>
       </div>
     </div>

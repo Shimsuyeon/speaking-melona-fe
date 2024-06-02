@@ -13,7 +13,7 @@ interface ScanCheckModalProps {
 }
 
 const ScanCheckModal = ({ onClose, barcode }: ScanCheckModalProps) => {
-  const { data, isFetching, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: [QueryKeys.character, { barcode }],
     queryFn: getCharacter,
   });

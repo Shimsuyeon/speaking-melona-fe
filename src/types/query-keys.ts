@@ -1,5 +1,6 @@
 enum QueryKeys {
   character = "character",
+  characters = "characters",
   story = "story",
 }
 
