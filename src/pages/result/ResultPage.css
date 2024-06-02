@@ -1,0 +1,15 @@
+/* ResultPage.css */
+
+.loading-animation {
+  animation: fadeInOut 2s infinite;
+}
+
+@keyframes fadeInOut {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}

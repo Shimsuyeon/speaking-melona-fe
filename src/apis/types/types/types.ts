@@ -39,5 +39,20 @@ export interface CharacterErrorOutput {
 }
 
 export interface StorySuccessOutput {
-  story: string;
+  상황: string;
+  엔딩: string;
+  캐릭터: {
+    이름: string;
+    페르소나: string;
+    레전드_설정: string;
+    이미지: string;
+  }[];
+  플롯: {
+    캐릭터: string;
+    대사: string;
+  }[];
+  궁합: {
+    점수: number;
+    설명: string;
+  };
 }

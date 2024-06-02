@@ -1,9 +1,9 @@
 import Quagga from "@ericblade/quagga2";
+import { useOverlay } from "@toss/use-overlay";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { useRecoilState } from "recoil";
-import { charactersState } from "src/store";
 
+import ScanCheckModal from "./ScanCheckModal";
 import Scanner from "./Scanner";
 
 interface ScanningModalProps {
@@ -13,8 +13,7 @@ interface ScanningModalProps {
 const ScanningModal = ({ onClose }: ScanningModalProps) => {
   const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]); // array of available cameras, as returned by Quagga.CameraAccess.enumerateVideoDevices()
   const scannerRef = useRef(null); // reference to the scanner element in the DOM
-
-  const [, setCharacters] = useRecoilState(charactersState);
+  const isActiveRef = useRef(true);
 
   useEffect(() => {
     const handleMobileBackEvent = () => {
@@ -54,8 +53,26 @@ const ScanningModal = ({ onClose }: ScanningModalProps) => {
     init();
   }, []);
 
+  const overlay = useOverlay();
+
   const handleBarcodeDetected = async (result: string) => {
-    setCharacters((prev) => [...prev, result]);
+    if (!isActiveRef.current) return;
+
+    isActiveRef.current = false;
+
+    await new Promise((resolve) => {
+      overlay.open(({ exit }) => (
+        <ScanCheckModal
+          barcode={result}
+          onClose={() => {
+            exit();
+            resolve(true);
+          }}
+        />
+      ));
+    });
+
+    isActiveRef.current = true;
 
     onClose();
   };

@@ -10,7 +10,7 @@ import ScanningModal from "./ScanningModal";
 
 const ScanPage = () => {
   const [openScanningModal, setOpenScanningModal] = useState(false);
-  const [characters, setCharacters] = useRecoilState(charactersState);
+  const [characters] = useRecoilState(charactersState);
 
   return (
     <div className="flex flex-col items-center">
