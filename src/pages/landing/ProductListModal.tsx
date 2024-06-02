@@ -27,7 +27,7 @@ const ProductListModal = ({ onClose }: ProductListModalProps) => {
       >
         {data ? (
           data.map((product) => (
-            <p key={product.barcode} className={"text-center"}>
+            <p key={product.name} className={"text-center"}>
               {product.name}
             </p>
           ))
