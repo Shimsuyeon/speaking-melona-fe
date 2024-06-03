@@ -8,7 +8,7 @@ interface RequestModalProps {
   barcode: string;
 }
 
-const RequestModal = ({ onClose }: RequestModalProps) => {
+const RequestModal = ({ onClose, barcode }: RequestModalProps) => {
   const [content, setContent] = useState("");
 
   const sendRequest = useMutation({
@@ -54,7 +54,7 @@ const RequestModal = ({ onClose }: RequestModalProps) => {
           onClick={() => {
             sendRequest.mutate({
               content,
-              barcode: "123",
+              barcode,
             });
           }}
         >
